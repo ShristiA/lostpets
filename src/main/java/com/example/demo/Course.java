@@ -34,6 +34,14 @@ public class Course {
 
     }
 
+    public Course(@NotNull @Size(min = 4) String title, @NotNull @Size(min = 3) String instructor, @NotNull @Size(min = 10) String description, @NotNull @Min(3) int credit) {
+        this.title = title;
+        this.instructor = instructor;
+        this.description = description;
+        this.credit = credit;
+    }
+
+
     public long getId() {
         return id;
     }

@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="base" :: navlinks> </div>
+
 <a href="/">Show All Courses</a><br />
 Title:<span th:text="${course.title}"></span><br />
 Instructor :<span th:text="${course.instructor}" ></span><br />
