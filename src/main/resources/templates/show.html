@@ -7,11 +7,10 @@
 <body>
 <div th:replace="base" :: navlinks> </div>
 
-<a href="/">Show All Courses</a><br />
-Title:<span th:text="${course.title}"></span><br />
-Instructor :<span th:text="${course.instructor}" ></span><br />
-Description :<p th:text="${course.description}" ></p>
-Credit :<span th:text="${course.credit}" ></span><br />
-<a th:href="@{/delete/{id}(id=${course.id})}">Delete this course</a>
+<a href="/">Show All message</a><br />
+Enter your message:<p th:text="${message.description}"></p><br />
+Message Post Date :<span th:text="${message.date}" ></span><br />
+Message Sent By: <p th:text="${message.sentBy}" ></p>
+
 </body>
 </html>

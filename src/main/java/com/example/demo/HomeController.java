@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 @Autowired
-CourseRepository courseRepository;
+MessageRepository messageRepository;
 
     @Autowired
     private UserService userService;
@@ -43,44 +43,41 @@ CourseRepository courseRepository;
     }
     @RequestMapping("/login")
     public String index(){
+
         return"login";
     }
 
 @RequestMapping("/")
-    public String listCourse(Model model){
-    model.addAttribute("courses", courseRepository.findAll());
+    public String listMessage(Model model){
+    model.addAttribute("messages", messageRepository.findAll());
     return "list";
 }
 
 @GetMapping("/add")
 public String courseForm(Model model){
-    model.addAttribute("course", new Course());
-    return "courseform";
+    model.addAttribute("message", new Message());
+    return "messageform";
 }
 @PostMapping("/process")
-    public String processForm(@Valid Course course, BindingResult result) {
+    public String processForm(@Valid Message message, BindingResult result) {
     if (result.hasErrors()) {
-        return "courseform";
+        return "messageform";
     }
-    courseRepository.save(course);
+    messageRepository.save(message);
     return "redirect:/";
 }
 
 @RequestMapping("/detail/{id}")
-    public String showCourse(@PathVariable("id") long id, Model model)
+    public String showMessage(@PathVariable("id") long id, Model model)
 {
-    model.addAttribute("course", courseRepository.findById(id).get());
+    model.addAttribute("message", messageRepository.findById(id).get());
     return "show";
 }
 @RequestMapping("/update/{id}")
-    public String updateCourse(@PathVariable("id") long id, Model model){
-    model.addAttribute("course", courseRepository.findById(id).get());
-    return "courseform";
-}
-@RequestMapping("/delete/{id}")
-    public String delCourse(@PathVariable("id") long id){
-    courseRepository.deleteById(id);
-    return "redirect:/";
+    public String updateMessage(@PathVariable("id") long id, Model model){
+    model.addAttribute("message", messageRepository.findById(id).get());
+    return "messageform";
+
 }
     protected User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
