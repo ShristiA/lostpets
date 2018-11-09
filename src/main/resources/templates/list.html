@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="base :: headstuff"></head>
+<head>
+    <th:block th:replace="base :: headstuff"></th:block>
+
+</head>
+
 <body>
 <div th:replace="base :: navlinks"> </div>
 
-<h4>list of Message</h4>
-<a href ="/add">Add message</a><br />
-
+<div class="container">
+    <div class="jumbotron">
+        <a href ="/add">Add message</a><br />
+<h5>List of Message</h5>
 <table>
     <tr>
         <th>Content</th>
-        <th>SentBY</th>
-        <td>Date</td>
+        <th>SentBy</th>
+        <th>Date</th>
     </tr>
 
     <tr th:each="message : ${messages}">
@@ -22,17 +27,23 @@
             <div sec:authorize="hasAuthority('ADMIN')">
             <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
             <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+
                       </div>
             <div sec:authorize="hasAuthority('USER')">
                 <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
-            </div>
+                <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+           </div>
 
 </td>
     </tr>
 </table>
-<div sec:authorize ="isAuthenticated()">
-    <a href="/logout">logout </a>
+        <br>
+        <div sec:authorize ="isAuthenticated()">
+            <a class ="btn-primary btn-lg"  href="/logout" role="button">logout </a>
+        </div>
+    </div>
 </div>
+
 
 </body>
 </html>

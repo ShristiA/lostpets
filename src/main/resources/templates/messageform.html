@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 <div th:replace="base" :: navlinks> </div>
-
+<div class="container">
+    <div class="jumbotron">
 <form action="#" th:action="@{/process}" th:object="${message}" method="post">
     <input type ="hidden" th:field="*{id}" />
 
     <h4>Add message</h4>
-
-    Description :<textarea rows="3" th:field="*{description}" />
+    <h4>Description :</h4><textarea rows="1" th:field="*{description}" />
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></br >
 
-    Date :<input type="text" th:field="*{date}" />
+    <h4>Date :</h4><input type="text" th:field="*{date}" />
     <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span></br >
 
-    Sent By :<input type="text" th:field="*{sentBy}" />
+    <h4>Sent By :</h4><input type="text" th:field="*{sentBy}" />
     <span th:if="${#fields.hasErrors('sentBy')}" th:errors="*{sentBy}"></span></br >
 
     <br />
-    <input type="submit" value="Submit" />
-
+    <h4><input type="submit" value="Submit" /></h4>
 
 </form>
+    </div>
+</div>
 
 </body>
 </html>
