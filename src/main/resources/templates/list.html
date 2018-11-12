@@ -11,19 +11,26 @@
 <div class="container">
     <div class="jumbotron">
         <a href ="/add">Add message</a><br />
-<h5>List of Message</h5>
-<table>
-    <tr>
-        <th>Content</th>
-        <th>SentBy</th>
-        <th>Date</th>
-    </tr>
+        <h5>List of Message</h5>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Content</th>
+                <th>SentBy</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
 
     <tr th:each="message : ${messages}">
         <td th:text ="${message.description}"></td>
         <td th:text ="${message.sentBy}"></td>
         <td th:text ="${message.Date}"></td>
         <td>
+            <span th:if="${user_id == message.user.id}">
+                <a th:href="@{/update/{id} (id=${message.id})}">Update</a>
+            </span>
             <div sec:authorize="hasAuthority('ADMIN')">
             <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
             <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
@@ -36,7 +43,11 @@
 
 </td>
     </tr>
-</table>
+            </tr>
+            </tbody>
+        </table>
+
+
         <br>
         <div sec:authorize ="isAuthenticated()">
             <a class ="btn-primary btn-lg"  href="/logout" role="button">logout </a>

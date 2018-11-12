@@ -50,6 +50,9 @@ MessageRepository messageRepository;
 @RequestMapping("/")
     public String listMessage(Model model){
     model.addAttribute("messages", messageRepository.findAll());
+    if(getUser() != null){
+        model.addAttribute("user_id", getUser().getId()); //getting user name in the userid.
+    }
     return "list";
 }
 
@@ -63,6 +66,7 @@ public String courseForm(Model model){
     if (result.hasErrors()) {
         return "messageform";
     }
+    message.setUser(getUser()); //like saving a value of userid in message table.
     messageRepository.save(message);
     return "redirect:/";
 }

@@ -24,13 +24,14 @@
         </thead>
     <tbody>
         <tr>
+            <td></td>
             <td><span th:text="${message.description}"></span></td>
-            <td><span th:text="${message.date}" ></span></td>
-            <td><span th:text="${message.sentBy}" ></span></td>
+            <td><span th:text="${message.date }" ></span></td>
+            <td><span th:text="${message.sentBy }" ></span></td>
         </tr>
     </tbody>
     </table>
-            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+
 </div>
 </div>
 </body>
