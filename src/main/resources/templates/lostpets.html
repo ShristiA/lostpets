@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <title>Title</title>
+
+</head>
+<body>
+<tr th:each="message : ${messages}">
+                <span th:if="${message.status == 'missing'}">
+       Name: <td th:text ="${message.name}"></td><br/>
+        Description: <td th:text ="${message.description}"></td><br/>
+       Date: <td th:text ="${message.Date}"></td><br/>
+               Status:  <td th:text="${message.status}"></td><br/>
+                </span>
+    <br />
+</tr>
+</body>
+</html>

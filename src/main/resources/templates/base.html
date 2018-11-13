@@ -17,7 +17,7 @@
                 crossorigin="anonymous"></script>
         <style>
             body{
-                background-image: url("https://images.unsplash.com/photo-1527645746751-d4dc7aa53163?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjI0MX0&s=fd83f460554fa02e4c97d8f28d2bd2a5&auto=format&fit=crop&w=967&q=80");
+                background-image: url("https://images.unsplash.com/photo-1514464447615-0f23309bf87b?ixlib=rb-0.3.5&s=ac77110099c330cca0596e45044967e7&auto=format&fit=crop&w=1020&q=80");
                 background-size: 1350px;
             }
         </style>
@@ -57,11 +57,14 @@
 
 <div th:fragment="navlinks">
     <ul>
-        <li> <a href = "/">Welcome to Messaging App!</a></li>
         <li> <a href="/">Home</a></li>
+        <li> <a href="/">All Pets </a></li>
+        <li> <a href="/foundpets">Found Pets </a></li>
+        <li> <a href="/lostpets">Lost Pets </a></li>
 
             <div sec:authorize ="!isAuthenticated()">
                 <li style ="float:right"><a class="active" href="/login">Login </a></li> </div>
+
 
             <div sec:authorize ="!isAuthenticated()">
                 <li style ="float:right"><a class="active" href="/register"> Register</a></li></div>
@@ -71,8 +74,17 @@
                 <li style ="float:right"><a class="active" href="/logout">logout </a></li></div>
 
 
-    </ul>
-</div>
 
+
+
+
+    </ul>
+
+    <div class ="container">
+        <Div class="jumbotron">
+            <h4 class = "text-center">Help find our lost Furry Friends!</h4>
+    </div>
+</div>
+</div>
 </body>
 </html>

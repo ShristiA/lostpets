@@ -1,8 +1,8 @@
 
 input[type=password], select {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 6px 10px;
+    margin: 6px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -10,7 +10,7 @@ input[type=password], select {
 }
 input[type=text], select {
     width: 100%;
-    padding: 12px 20px;
+    padding: 6px 10px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -50,4 +50,14 @@ div.description{
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+}
+.col-75 {
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+}
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
 }

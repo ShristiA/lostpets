@@ -8,9 +8,19 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String description;
-    private String sentBy;
+    private String name;
     private String date;
+    private String description;
+    private String status;
+
+    public Message(String name, String date, String description, String status, User user) {
+        this.name = name;
+        this.date = date;
+        this.description = description;
+        this.status = status;
+        this.user = user;
+    }
+
 
     public User getUser() {
         return user;
@@ -27,11 +37,6 @@ public class Message {
     public Message() {
     }
 
-    public Message(String description, String sentBy, String date) {
-        this.description = description;
-        this.sentBy = sentBy;
-        this.date = date;
-    }
 
     public long getId() {
         return id;
@@ -39,6 +44,22 @@ public class Message {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -49,19 +70,11 @@ public class Message {
         this.description = description;
     }
 
-    public String getSentBy() {
-        return sentBy;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSentBy(String sentBy) {
-        this.sentBy = sentBy;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

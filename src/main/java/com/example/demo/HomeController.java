@@ -48,13 +48,31 @@ MessageRepository messageRepository;
     }
 
 @RequestMapping("/")
-    public String listMessage(Model model){
+    public String allpets(Model model){
     model.addAttribute("messages", messageRepository.findAll());
     if(getUser() != null){
         model.addAttribute("user_id", getUser().getId()); //getting user name in the userid.
     }
     return "list";
 }
+
+
+    @RequestMapping("/foundpets")
+    public String showfoundpets(Model model){
+        model.addAttribute("messages", messageRepository.findAll());
+
+            model.addAttribute("user_id", getUser().getId()); //getting user name in the userid.
+
+        return "foundpets";
+    }
+    @RequestMapping("/lostpets")
+    public String showlostpets(Model model){
+        model.addAttribute("messages", messageRepository.findAll());
+
+            model.addAttribute("user_id", getUser().getId()); //getting user name in the userid.
+
+        return "lostpets";
+    }
 
 @GetMapping("/add")
 public String courseForm(Model model){

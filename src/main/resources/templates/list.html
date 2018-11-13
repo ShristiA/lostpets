@@ -10,30 +10,32 @@
 
 <div class="container">
     <div class="jumbotron">
-        <a href ="/add">Add message</a><br />
-        <h5>List of Message</h5>
+        <a href ="/add">Add a lost pets</a><br />
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Content</th>
-                <th>SentBy</th>
+                <th>Name</th>
                 <th>Date</th>
+                <th>Description</th>
+                <th>status</th>
             </tr>
             </thead>
             <tbody>
             <tr>
 
     <tr th:each="message : ${messages}">
+                <span th:if="${message.status == 'found' || message.status == 'missing'}">
         <td th:text ="${message.description}"></td>
-        <td th:text ="${message.sentBy}"></td>
+        <td th:text ="${message.name}"></td>
         <td th:text ="${message.Date}"></td>
+                <td th:text="${message.status}"></td>
         <td>
             <span th:if="${user_id == message.user.id}">
                 <a th:href="@{/update/{id} (id=${message.id})}">Update</a>
             </span>
             <div sec:authorize="hasAuthority('ADMIN')">
             <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
-            <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+            <a th:href="@{/detail/{id}(id=${message.id})}">Detail</a>
 
                       </div>
             <div sec:authorize="hasAuthority('USER')">
