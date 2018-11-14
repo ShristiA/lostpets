@@ -24,6 +24,10 @@
             <tr>
 
     <tr th:each="message : ${messages}">
+                <div th:if="${message.headshot} !=null">
+                    <img th:src="${message.headshot}" />
+                    <hr />
+                </div>
                 <span th:if="${message.status == 'found' || message.status == 'missing'}">
         <td th:text ="${message.description}"></td>
         <td th:text ="${message.name}"></td>

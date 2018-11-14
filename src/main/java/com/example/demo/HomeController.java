@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -20,6 +24,9 @@ MessageRepository messageRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
@@ -80,15 +87,28 @@ public String courseForm(Model model){
     return "messageform";
 }
 @PostMapping("/process")
-    public String processForm(@Valid Message message, BindingResult result) {
+    public String processForm(@Valid Message message, BindingResult result, @RequestParam("file") MultipartFile file) {
     if (result.hasErrors()) {
         return "messageform";
     }
     message.setUser(getUser()); //like saving a value of userid in message table.
     messageRepository.save(message);
+
+    if (file.isEmpty()) {
+        return "redirect:/add";
+    }
+    try {
+        Map uploadResult = cloudc.upload(file.getBytes(),
+                ObjectUtils.asMap("resourceType", "auto"));
+        message.setHeadshot(uploadResult.get("url").toString());
+        messageRepository.save(message);
+    } catch (
+            IOException e) {
+        e.printStackTrace();
+        return "redirect:/add";
+    }
     return "redirect:/";
 }
-
 @RequestMapping("/detail/{id}")
     public String showMessage(@PathVariable("id") long id, Model model)
 {
