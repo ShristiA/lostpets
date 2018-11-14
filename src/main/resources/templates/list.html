@@ -11,47 +11,37 @@
 <div class="container">
     <div class="jumbotron">
         <a href ="/add">Add a lost pets</a><br />
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
 
-    <tr th:each="message : ${messages}">
-                <div th:if="${message.headshot} !=null">
+
+
+            <div th:each="message : ${messages}">
+                Name: <span th:text ="${message.name}"></span>
+                Description: <span th:text ="${message.description}"></span>
+                Date Lost: <span th:text ="${message.Date}"></span>
+                Status: <span th:text="${message.status}"></span>
+               Image: <div th:if="${message.headshot} !=null">
                     <img th:src="${message.headshot}" />
                     <hr />
                 </div>
-                <span th:if="${message.status == 'found' || message.status == 'missing'}">
-        <td th:text ="${message.description}"></td>
-        <td th:text ="${message.name}"></td>
-        <td th:text ="${message.Date}"></td>
-                <td th:text="${message.status}"></td>
-        <td>
-            <span th:if="${user_id == message.user.id}">
-                <a th:href="@{/update/{id} (id=${message.id})}">Update</a>
-            </span>
-            <div sec:authorize="hasAuthority('ADMIN')">
-            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
-            <a th:href="@{/detail/{id}(id=${message.id})}">Detail</a>
 
-                      </div>
+
+
+
+            <span th:if="${user_id == message.user.id}">
+                <a th:href="@{/update/{id} (id=${message.id})}">Edit</a>
+            </span>
+
+
+            <div sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{/update/{id}(id=${message.id})}">Edit</a>
+            <a th:href="@{/detail/{id}(id=${message.id})}">Detail</a>
+            </div>
+
             <div sec:authorize="hasAuthority('USER')">
                 <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
 
-           </div>
-
-</td>
-    </tr>
-            </tr>
-            </tbody>
-        </table>
+            </div>
+            </div>
 
 
         <br>

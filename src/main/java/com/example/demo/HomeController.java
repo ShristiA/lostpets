@@ -67,7 +67,6 @@ MessageRepository messageRepository;
     @RequestMapping("/foundpets")
     public String showfoundpets(Model model){
         model.addAttribute("messages", messageRepository.findAll());
-
             model.addAttribute("user_id", getUser().getId()); //getting user name in the userid.
 
         return "foundpets";
@@ -82,20 +81,23 @@ MessageRepository messageRepository;
     }
 
 @GetMapping("/add")
-public String courseForm(Model model){
+public String messageForm(Model model){
     model.addAttribute("message", new Message());
+    model.addAttribute("messages", messageRepository.findAll());
     return "messageform";
 }
 @PostMapping("/process")
-    public String processForm(@Valid Message message, BindingResult result, @RequestParam("file") MultipartFile file) {
+    public String processForm(@Valid Message message, BindingResult result,
+                              @RequestParam("file") MultipartFile file) {
     if (result.hasErrors()) {
         return "messageform";
     }
-    message.setUser(getUser()); //like saving a value of userid in message table.
-    messageRepository.save(message);
+
+        message.setUser(getUser()); //like saving a value of userid in message table.
+        messageRepository.save(message);
 
     if (file.isEmpty()) {
-        return "redirect:/add";
+        return "redirect:/";
     }
     try {
         Map uploadResult = cloudc.upload(file.getBytes(),
@@ -110,17 +112,17 @@ public String courseForm(Model model){
     return "redirect:/";
 }
 @RequestMapping("/detail/{id}")
-    public String showMessage(@PathVariable("id") long id, Model model)
-{
+    public String showMessage(@PathVariable("id") long id, Model model) {
     model.addAttribute("message", messageRepository.findById(id).get());
     return "show";
 }
 @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id, Model model){
+   model.addAttribute("headshot",messageRepository.findById(id).get().getHeadshot());
     model.addAttribute("message", messageRepository.findById(id).get());
     return "messageform";
-
 }
+
     protected User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();

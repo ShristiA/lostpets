@@ -12,14 +12,25 @@ public class Message {
     private String date;
     private String description;
     private String status;
+    private String headshot;
 
-    public Message(String name, String date, String description, String status, User user) {
+    public Message(String name, String date, String description, String status, String headshot, User user) {
         this.name = name;
         this.date = date;
         this.description = description;
         this.status = status;
+        this.headshot = headshot;
         this.user = user;
     }
+
+    public String getHeadshot() {
+        return headshot;
+    }
+
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
+    }
+
 
 
     public User getUser() {
